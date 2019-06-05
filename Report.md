@@ -1,8 +1,10 @@
+# Project Collaboration and Competition: Report
+
+## Goal
+
 In this report I discuss the solution to the third project "Collaboration and Competion" of the Udacity Deep Reinforcement Learning Nanodegree Program (DRLNP). The goal of the project is to train two agents to play tennis. 
 
-Environment
-
-The environmnent for this project Tennis is given by the Udacity team and it is similar to, but not identical to the Tennis environment on the Unity ML-Agents GitHub page (LINK).
+The environmnent for this project Tennis is given by the Udacity team and it is similar to, but not identical to the Tennis environment on the [Unity ML-Agents GitHub page](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md).
 
 In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1. If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01. Thus, the goal of each agent is to keep the ball in play.
 
@@ -10,23 +12,21 @@ The observation space consists of 8 variables corresponding to the position and 
 
 The task is episodic, and in order to solve the environment, the agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). 
 
-
-Algorithm
+## Solution
+### Algorithm Description
 
 It has been realised that the traditional reinforcement learning approaches such as Q-learning or policy gradient are not performing so well in the multi-agent environments. Firstly, each agent’s policy is changing over the training process, and secondly, the environment becomes non-stationary when considered from the perspective of individual agents. This causes learning stability challenges and the past experience replay can not be used in the straightforward manner (PAPERREF).
 
 The OpenAI team developed a new algorithm Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments (MADDPG, PAPERREF) which extends a DDPG reinforcement learning algorithm, taking inspiration from actor-critic reinforcement learning techniques. The MADDPG algorithm allows centralized learning and decentralized execution in multiagent environments, in which way the agents can learn to collaborate and compete with each other.
 
-As explained by the OpenSI team in BLOGREF, in this new algorithm each agent is treated as an “actor” which gets an advice from a “critic” helping the actor to decide what actions to reinforce during the training process. The critic predicts the value - expected reward in the future - of an action in a particular state. The agent - the actor - uses then this value to update its policy, making the whole process more stable than directly using the reward. In order to train multiple agents acting in a globally-coordinated way the critics are modified to access the observations and actions of all the agents. This is schemtically shown in the figure below (https://openai.com/blog/learning-to-cooperate-compete-and-communicate/)
+As explained by the OpenAI team in https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md, in this new algorithm each agent is treated as an “actor” which gets an advice from a “critic” helping the actor to decide what actions to reinforce during the training process. The critic predicts the value - expected reward in the future - of an action in a particular state. The agent - the actor - uses then this value to update its policy, making the whole process more stable than directly using the reward. In order to train multiple agents acting in a globally-coordinated way the critics are modified to access the observations and actions of all the agents. This is schemtically shown in the figure below taken from [OPENAI](https://openai.com/blog/learning-to-cooperate-compete-and-communicate/)
 
-DIAGRAM
+![alt text](nipsdiagram_2.gif)
 
 Given that each agent independently learns a centralized critic, the MADDPG algorithm can be used for any reward distributions between agents, including adversarial cases where with the opposing rewards. The MADDPG algorithm has been tested on a range of tasks: "two AI agents trying to go to a specific location and learning to split up to hide their intended location from the opposing agent; one agent communicating the name of a landmark to another agent; and three agents coordinating to travel to landmarks without bumping into each other" and it performed better than DDPG on all of them (BLOGREF).
 
 
-
-Solution
-
+## Final set-up
 
 The solution of this project is based on the implementation of the MADDPG algorithm as described above. The approach was to adopt the solution from the second DRLNP project (LINK) to the multi-agent environment. 
 
@@ -74,7 +74,7 @@ This was a typical learning behaviour: the agents learn very slowly with the sco
 
 
 
-Future work
+##Future work
 
 In order to improve the performance of the network one could try the following techniques:
 
@@ -84,7 +84,6 @@ In order to improve the performance of the network one could try the following t
 
 
 
-
-References
+##References
 
 
