@@ -19,8 +19,8 @@ Unity brain name: TennisBrain
         Number of stacked Vector Observation: 3
         Vector Action space type: continuous
         Vector Action space size (per agent): 2
-        Vector Action descriptions: 
-        ```
+        Vector Action descriptions:  
+```
 
 The task is episodic, and in order to solve the environment, the agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,
 
