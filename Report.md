@@ -15,26 +15,24 @@ The task is episodic, and in order to solve the environment, the agents must get
 ## Solution
 ### Algorithm Description
 
-It has been realised that the traditional reinforcement learning approaches such as Q-learning or policy gradient are not performing so well in the multi-agent environments. Firstly, each agent’s policy is changing over the training process, and secondly, the environment becomes non-stationary when considered from the perspective of individual agents. This causes learning stability challenges and the past experience replay can not be used in the straightforward manner (PAPERREF).
+It has been realised that the traditional reinforcement learning approaches such as Q-learning or policy gradient are not performing so well in the multi-agent environments. Firstly, each agent’s policy is changing over the training process, and secondly, the environment becomes non-stationary when considered from the perspective of individual agents. This causes learning stability challenges and the past experience replay can not be used in the straightforward manner (Lowe et al. 2017).
 
-The OpenAI team developed a new algorithm Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments (MADDPG, PAPERREF) which extends a DDPG reinforcement learning algorithm, taking inspiration from actor-critic reinforcement learning techniques. The MADDPG algorithm allows centralized learning and decentralized execution in multiagent environments, in which way the agents can learn to collaborate and compete with each other.
+The OpenAI team developed a new algorithm Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments (MADDPG, Lowe et al. 2017) which extends a DDPG reinforcement learning algorithm (Lillicrap et al. 2016), taking inspiration from actor-critic reinforcement learning techniques. The MADDPG algorithm allows centralized learning and decentralized execution in multiagent environments, in which way the agents can learn to collaborate and compete with each other.
 
-As explained by the OpenAI team in https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md, in this new algorithm each agent is treated as an “actor” which gets an advice from a “critic” helping the actor to decide what actions to reinforce during the training process. The critic predicts the value - expected reward in the future - of an action in a particular state. The agent - the actor - uses then this value to update its policy, making the whole process more stable than directly using the reward. In order to train multiple agents acting in a globally-coordinated way the critics are modified to access the observations and actions of all the agents. This is schemtically shown in the figure below taken from [OPENAI](https://openai.com/blog/learning-to-cooperate-compete-and-communicate/)
+As explained by the OpenAI team in a [blog](https://openai.com/blog/learning-to-cooperate-compete-and-communicate/), in this new algorithm each agent is treated as an “actor” which gets an advice from a “critic” helping the actor to decide what actions to reinforce during the training process. The critic predicts the value - expected reward in the future - of an action in a particular state. The agent - the actor - uses then this value to update its policy, making the whole process more stable than directly using the reward. In order to train multiple agents acting in a globally-coordinated way the critics are modified to access the observations and actions of all the agents. This is schemtically shown in the figure below taken from the same [blog](https://openai.com/blog/learning-to-cooperate-compete-and-communicate/)
 
 ![alt text](nipsdiagram_2.gif)
 
-Given that each agent independently learns a centralized critic, the MADDPG algorithm can be used for any reward distributions between agents, including adversarial cases where with the opposing rewards. The MADDPG algorithm has been tested on a range of tasks: "two AI agents trying to go to a specific location and learning to split up to hide their intended location from the opposing agent; one agent communicating the name of a landmark to another agent; and three agents coordinating to travel to landmarks without bumping into each other" and it performed better than DDPG on all of them (BLOGREF).
+Given that each agent independently learns a centralized critic, the MADDPG algorithm can be used for any reward distributions between agents, including adversarial cases where with the opposing rewards. The MADDPG algorithm has been tested on a range of tasks: "two AI agents trying to go to a specific location and learning to split up to hide their intended location from the opposing agent; one agent communicating the name of a landmark to another agent; and three agents coordinating to travel to landmarks without bumping into each other" and it performed better than DDPG on all of them (https://openai.com/blog/learning-to-cooperate-compete-and-communicate/).
 
 
 ## Final set-up
 
-The solution of this project is based on the implementation of the MADDPG algorithm as described above. The approach was to adopt the solution from the second DRLNP project (LINK) to the multi-agent environment. 
+The solution of this project is based on the implementation of the MADDPG algorithm as described above. The approach was to adopt the solution from the [second DRLNP project](https://github.com/MesecevaKci/deepRL_continuous_control) to the multi-agent environment. 
 
 Given the MADPG algorithm, the implemented changes include a modification to the critic part of the deep network model (in model.py): the critic for each agent uses states observed and actions taken by the other agent during the training, while each actor has access to only its agent's observations and actions. 
 
-Actor and Critic Networks Architectures (code model.py)
-
- The final layer weights and biases of both the actor and critic were initialized from a uniform distribution [−3×10−3,3×10−3].  As described in the DDQN paper, the reason for this was to garantee that the initial outputs for the policy and value estimates are close to zero. The rest of the network layers were initialized from uniform distributions [−1√f,1√f] where f is the fan-in of the layer. The actions in the Critic network were included in the second hidden layer. 
+The final layer weights and biases of both the actor and critic were initialized from a uniform distribution [−3×10−3,3×10−3].  As described in the DDQN paper, the reason for this was to garantee that the initial outputs for the policy and value estimates are close to zero. The rest of the network layers were initialized from uniform distributions [−1√f,1√f] where f is the fan-in of the layer. The actions in the Critic network were included in the second hidden layer. 
 
  The actor (policy) network maps states to actions with the following structure:
     State input: 24 units
@@ -85,5 +83,7 @@ In order to improve the performance of the network one could try the following t
 
 
 ##References
-
-
+Lowe et al. 2017: https://papers.nips.cc/paper/7217-multi-agent-actor-critic-for-mixed-cooperative-competitive-environments.pdf
+Lillicrap et al. 2016, https://arxiv.org/pdf/1509.02971.pdf
+https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md
+https://github.com/MesecevaKci/deepRL_continuous_control
