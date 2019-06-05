@@ -65,7 +65,7 @@ WEIGHT_DECAY = 0        # L2 weight decay
 SIGMA = 0.1             # Ornstein-Uhlenbeck noise parameter
 THETA = 0.15            # Ornstein-Uhlenbeck noise parameter
 EPSILON = 1.0           # explore to exploit noise process added to act function in class Agent
-EPSILON_DECAY = 1e-6 # decay rate for noise process
+EPSILON_DECAY = 1e-6    # decay rate for noise process
 ```
 
 Importing the content from model.py and MADDPG_agent.py to the notebook Tennis.ipynb and running it, the environment was solved in 2868 episodes, as shown below:
