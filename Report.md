@@ -68,11 +68,13 @@ EPSILON = 1.0           # explore to exploit noise process added to act function
 EPSILON_DECAY = 1e-6 # decay rate for noise process
 ```
 
-Importing the content from model.py and MADDPG_agent.py to the notebook Tennis.ipynb and running it, I have solved the environment  in 2868 episodes, as shown below:
+Importing the content from model.py and MADDPG_agent.py to the notebook Tennis.ipynb and running it, the environment was solved in 2868 episodes, as shown below:
 
 ![alt text](score_final.png)
 
-This was a typical learning behaviour: the agents learn very slowly with the score around zero for >1000 episodes and then there is a sudden rise with the average score reaching 0.5. As a test I have also run the expriment longer after reaching the average score 0.5. I have seen that the score was increasing even further, however, the learning process became very slow and I have not run the expriment long enough to verify whether the learning would continue/plato or decrease again. 
+This was a typical learning behaviour: the agents learn very slowly with the score around zero for >1000 episodes and then there is a sudden rise with the average score reaching 0.5. 
+
+As a test I have also run the experiment longer after reaching the average score 0.5. I have seen that the score was increasing even further, however, the learning process became very slow and I have not run the expriment long enough to verify whether the learning would continue/plato or decrease again. 
 
 
 
@@ -81,7 +83,7 @@ This was a typical learning behaviour: the agents learn very slowly with the sco
 In order to improve the performance of the network one could try the following techniques:
 
 1. More systematic exploration of the hyperparameters - in this work I have reused the parameters from another DDPG project. 
-2. Implement prioritized Experience Replay
+2. Implement prioritized Experience Replay.
 3. Test other methods and algorithms for multi-agent environments: multi-agent PPO or multi-agent DQN. 
 
 
