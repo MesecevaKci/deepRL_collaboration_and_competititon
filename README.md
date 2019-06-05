@@ -10,15 +10,8 @@ In this environment, two agents control rackets to bounce a ball over a net. If 
 
 The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation. Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping.
 
-```
-INFO:unityagents:
-'Academy' started successfully!
-Unity Academy name: Academy
-        Number of Brains: 1
-        Number of External Brains : 1
-        Lesson number : 0
-        Reset Parameters :
-		
+
+```		
 Unity brain name: TennisBrain
         Number of Visual Observations (per agent): 0
         Vector Observation space type: continuous
